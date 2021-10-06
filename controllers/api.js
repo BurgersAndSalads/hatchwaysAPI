@@ -5,7 +5,7 @@ module.exports = {
 
 function ping(req, res) {
     res.status(200).json({
-        success:'true',
+        success:'true'
     })
 }
 
@@ -15,33 +15,22 @@ function posts(req, res) {
     let direction = req.query.direction;
     const sortCategory = ['id', 'reads', 'likes', 'popularity', null, undefined];
     const sortDirection = ['asc', 'desc', null, undefined];
-    console.log([sortBy, direction]);
-    if (tags) {
-        
-        if (!sortCategory.includes(sortBy)) {
-            res.status(400).json(
-                {
-                    error: 'sortBy parameter is invalid'
-                }
-            )
-        }
-        
-        if (!sortDirection.includes(direction)) {
-            res.status(400).json(
-                {
-                    error: 'direction for sorting is invalid'
-                }
-            )
-        }
 
+    if (tags) {
+
+        if (!sortCategory.includes(sortBy)) {
+            res.status(400).json({error: 'sortBy parameter is invalid'})
+        } else if (sortBy == (null || undefined)) {sortBy = 'id'}
         
+        if (!sortDirection.includes(direction)) {res.status(400).json({error: 'direction for sorting is invalid'})
+        } else if (direction == (null || undefined)) {direction = 'asc'}
+
+        res.status(200).json({
+            
+        })
 
     } else {
-        res.status(400).json(
-            {
-                error: 'Tags parameter is required'
-            }
-        )
+        res.status(400).json({error: 'Tags parameter is required'})
     }
     res.send([tags,sortBy,direction]);
 }
