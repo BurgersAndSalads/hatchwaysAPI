@@ -12,13 +12,13 @@ function ping(req, res) {
 }
 
 function posts(req, res) {
-    let tags = req.query.tags;
+    let tags = req.query.tags.split(',');
     let sortBy = req.query.sortBy;
     let direction = req.query.direction;
     const sortCategory = ['id', 'reads', 'likes', 'popularity', null, undefined];
     const sortDirection = ['asc', 'desc', null, undefined];
 
-    if (tags) {
+    if (tags.length > 0) {
         if (!sortCategory.includes(sortBy)) {
             res.status(400).json({error: 'sortBy parameter is invalid'})
         } else if (sortBy == (null || undefined)) {sortBy = 'id'}
@@ -26,11 +26,14 @@ function posts(req, res) {
         if (!sortDirection.includes(direction)) {res.status(400).json({error: 'direction for sorting is invalid'})
         } else if (direction == (null || undefined)) {direction = 'asc'}
         
+        // need to get data from source and sort it, api only take one param at a time, will need to take care of duplicates and sort them in local cache
+        tags.forEach(tag => {
+            fetch(`https://api.hatchways.io/assessment/blog/posts?tag=${tag}`)
+                .then(data => data.json())
+                .then(json => posts.push(json));
+        });
+
         res.status(200);
-        fetch(`https://api.hatchways.io/assessment/blog/posts?tag=${tags}&sortBy=${sortBy}&direction=${direction}`)
-            .then(data => data.json())
-            .then(json => res.json(json));
-        
     } else {
         res.status(400).json({error: 'Tags parameter is required'})
     }
