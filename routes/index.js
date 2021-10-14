@@ -11,6 +11,6 @@ router.get('/', function(req, res, next) {
 router.get('/api/ping', apiCtrl.ping);
 
 // api requirement 2, get posts and sort them
-router.get('/api/posts', apiCtrl.posts);
+router.get('/api/posts', apiCtrl.postsGet);
 
 module.exports = router;
