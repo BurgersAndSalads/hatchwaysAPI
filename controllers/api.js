@@ -28,23 +28,37 @@ function postsGet(req, res) {
         } else if (direction == (null || undefined)) {direction = 'asc'}
         
         async function renderPosts(tagsList) {
-            let posts = [];
+            let postsUnsorted = [];
             
             async function fetchPosts(tag) {
                 let response = await fetch(url+`${tag}`);
-                let post = await response.json();
-                return post;
+                let json = await response.json();
+                return json;
+            }
+            
+            async function forTags(tags) {
+                let postsRaw =[];
+                for (let i=0; tags.length > i; i++) {
+                    postsRaw[i] = await fetchPosts(tags[i]);
+                }
+                return postsRaw;
             }
 
-            async function forTags(tags) {
-                for (let i=0; tags.length > i; i++) {
-                    posts[i] = await fetchPosts(tags[i]);
+            async function postsProcessing(rawList) {
+                // postsUnsorted and rawlist are the same variable????!!?!?!?
+                rawList = await forTags(tagsList);
+                for (let i=0; rawList.length > i; i++) {
+                    for (let j=0; rawList[i].posts.length > j; j++) {
+                        postsUnsorted[rawList[i].posts[j].id] = rawList[i].posts[j];
+                    }
                 }
-                return posts;
+                let filteredPosts = postsUnsorted.filter(Boolean);
+                return filteredPosts;
             }
- 
-            await forTags(tagsList);
-            res.status(200).json(posts);
+
+            // calling processing on the posts unsorted and it turns into rawlist and gets processed but is still posts unsorted
+            let postsSorted = await postsProcessing(postsUnsorted);
+            res.status(200).json(postsSorted);
         }
         
         renderPosts(tags);
