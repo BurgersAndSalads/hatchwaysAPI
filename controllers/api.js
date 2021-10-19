@@ -13,18 +13,28 @@ function ping(req, res) {
 }
 
 function postsGet(req, res) {
+
+    if(!req.query.tags) {
+        res.status(400).json({error: 'The tag parameter is required'});
+        return
+    }
+
     let tags = req.query.tags.split(',');
     let sortBy = req.query.sortBy;
     let direction = req.query.direction;
-    const sortCategory = ['id', 'reads', 'likes', 'popularity', null, undefined];
-    const sortDirection = ['asc', 'desc', null, undefined];
+    const sortCategory = ['id', 'reads', 'likes', 'popularity', null, undefined, ''];
+    const sortDirection = ['asc', 'desc', null, undefined, ''];
 
     if (tags.length > 0) {
         if (!sortCategory.includes(sortBy)) {
             res.status(400).json({error: 'sortBy parameter is invalid'})
+            return
         } else if (sortBy == (null || undefined)) {sortBy = 'id'}
         
-        if (!sortDirection.includes(direction)) {res.status(400).json({error: 'direction for sorting is invalid'})
+        if (!sortDirection.includes(direction)) {
+            console.log(typeof(direction))
+            res.status(400).json({error: 'direction for sorting is invalid'})
+            return
         } else if (direction == (null || undefined)) {direction = 'asc'}
         
         async function renderPosts(tagsList) {
@@ -70,6 +80,6 @@ function postsGet(req, res) {
         renderPosts(tags);
 
     } else {
-        res.status(400).json({error: 'Tags parameter is required'})
+        res.status(400).json({error: 'Tags parameter is required'});
     }
 }
