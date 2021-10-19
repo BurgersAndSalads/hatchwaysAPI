@@ -12,11 +12,17 @@ in gitbash:
 
 5. open browser, go to localhost:3000, shows a landing page
 
+------------------------
+
 only two routes are expected
+
 localhost:3000/api/ping
+
 localhost:3000/api/posts
 
 all other routes will return 404 not found page
+
+-----------------------
 
 ping the server
 
@@ -26,31 +32,35 @@ expected server response: status 200
 
 expected browser response: json success message
 
+--------------------------
+
 get json from api
+
+----------------------------
 
 the only accepted url:
 
 localhost:3000/api/posts?tags=[]&sortBy=()&direction=()
 
-tags parameter is required, otherwise return a json body "error" : "the tag parameter is required"
+1. tags parameter is required, otherwise return a json body "error" : "the tag parameter is required"
 
-tags parameter can be anything, any combination of letters/numbers/symbols/space etc can be accepted. The api will recognize each part of the string seperated by commas as different cetegories to call on the source api.
+2. tags parameter can be anything, any combination of letters/numbers/symbols/space etc can be accepted. The api will recognize each part of the string seperated by commas as different cetegories to call on the source api.
 
-the api will call the source with each tag, and only collect posts from the source. all responses that doesnt contain a post will be ignored/discarded. therefore, if any tag provide does not yield anything from the source, the api will return an empty array. 
+3. the api will call the source with each tag, and only collect posts from the source. all responses that doesnt contain a post will be ignored/discarded. therefore, if any tag provide does not yield anything from the source, the api will return an empty array. 
 
-the api will only recognize tags, sortBy, and direction as query parameters. anything other than the three will be ignored.
+4. the api will only recognize tags, sortBy, and direction as query parameters. anything other than the three will be ignored.
 
-the sortBy parameter will only recognize from the following list:
+5. the sortBy parameter will only recognize from the following list:
 ['id', 'reads', 'likes', 'popularity', null, undefined, '']
 the defaul sort category is 'id', if the parameter does not exist in the url, or if the user does not input anything
 all other scenarios will result in sever status 400 and response with a json body "error" : "sortBy parameter is invalid"
 
-the direction parameter will only recognize from the follow list:
+6. the direction parameter will only recognize from the follow list:
 ['asc', 'desc', null, undefined, '']
 the default sort order is ascending, if the paramter does not exist in the url, or if the user does not input anything
 all other scenarios will result in sever status 400 and response with a json body "error" : "direction for sorting is invalid"
 
-if the user includes a sort direction but not sort category in the url, the category will defaul to id, and sort by the desired directon
+7. if the user includes a sort direction but not sort category in the url, the category will defaul to id, and sort by the desired directon
 
 
 
