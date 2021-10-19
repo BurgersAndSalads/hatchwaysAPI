@@ -45,6 +45,7 @@ if the user includes a sort direction but not sort category in the url, the cate
 
 
 example urls: 
+
     localhost:3000/api/posts?tags=tech
     expected status: 200
     expected response: json data with all posts having the tech tag, sorted by post id, ascending

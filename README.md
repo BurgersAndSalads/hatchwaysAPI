@@ -8,7 +8,7 @@ additional dependencies:
 node-fetch
 nodemon @ port: 3000
 
-instructions and testing
+<a href="https://github.com/BurgersAndSalads/hatchwaysAPI/blob/master/controllers/testing.md">instructions and testing</a>
 
 --------------------------------------
 
