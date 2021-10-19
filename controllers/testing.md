@@ -1,10 +1,16 @@
 testing done with browser with nodemon @ localhost:3000
 
-cd hatchwaysAPI
-npm i
-npm install nodemon
-nodemon
-open browser, go to localhost:3000, shows a landing page
+in gitbash: 
+
+1. cd hatchwaysAPI
+
+2. npm i
+
+3. npm install nodemon
+
+4. nodemon
+
+5. open browser, go to localhost:3000, shows a landing page
 
 only two routes are expected
 localhost:3000/api/ping
@@ -13,13 +19,17 @@ localhost:3000/api/posts
 all other routes will return 404 not found page
 
 ping the server
+
 url: localhost:3000/api/ping
+
 expected server response: status 200
+
 expected browser response: json success message
 
 get json from api
 
 the only accepted url:
+
 localhost:3000/api/posts?tags=[]&sortBy=()&direction=()
 
 tags parameter is required, otherwise return a json body "error" : "the tag parameter is required"
