@@ -1,8 +1,10 @@
 # hatchwaysAPI
 
 summary of feedback gotten after the assessment:
+and some thoughts for later for myself
 
-CORRECTNESS
+## CORRECTNESS
+====
 
 Passes some test cases (validation errors, or one tag given). Fails main test cases like multiple tags given.
 
@@ -15,7 +17,8 @@ We noticed that your return JSON was an array of the posts, as opposed to this f
 We expected the responses to contain unique posts. Your responses contained duplicate posts when querying by two or more tags.
 
 
-ORGANIZATION
+## ORGANIZATION
+====
 
 Code is easy to read, and good naming of variables. There is still a poor separation of concerns and some traces of repeated code.
 
@@ -27,7 +30,8 @@ Try to avoid including template files that are not actually used in your solutio
 
 The organization of your application could have been improved. It would have been cleaner to break up the logic into classes/functions.
 
-PERFORMANCE
+## PERFORMANCE
+====
 
 We cannot fully evaluate the efficiency of your solution due to incompleteness.
 
@@ -35,7 +39,8 @@ You could improve your code by using asynchronous requests (i.e. using Promise.a
 
 We noticed that you didn't add caching to your assessment.
 
-QUALITY
+## QUALITY
+====
 
 Good programming practices in general, but lacks language or framework-specific practices. Major anti-patterns are avoided, but minimal to no tests were written.
 
@@ -43,7 +48,8 @@ It would have been nice to see some unit tests for your submission.
 
 You could improve your code by handling potential errors when fetching data from our 3rd party API.
 
-SPEED
+## SPEED
+====
 
 In the 0-40% percentile for the completion time of a working solution or if the solution does not work.
 
