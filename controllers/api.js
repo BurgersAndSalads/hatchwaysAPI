@@ -72,7 +72,7 @@ function postsGet(req, res) {
 
                 return postsSorted;
             }
-
+  
             let postsSorted = await postsProcessing();
             res.status(200).json(postsSorted);
         }
